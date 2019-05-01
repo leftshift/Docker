@@ -5,6 +5,9 @@ services:
     volumes:
       - ./anfora.yaml:/opt/anfora/src/config/docker-compose.yaml
       - /var/anfora:/var/anfora
+    environment:
+      REDIS_HOST: redis
+      VUE_APP_CLIENT_DOMAIN: http://localhost:8080
     depends_on:
       - db
       - redis
