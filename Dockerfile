@@ -26,13 +26,19 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg \
  && echo "deb https://dl.yarnpkg.com/debian/ stable main" \
  |  tee /etc/apt/sources.list.d/yarn.list
 
-# install anfora
-COPY anfora/ /opt/anfora/
-COPY entrypoint.sh /opt/anfora/
-WORKDIR /opt/anfora/src/
+# install pipenv
+RUN pip3 install pipenv
 
+# install anfora dependencies
+COPY anfora/Pipfile /opt/anfora/Pipfile
+COPY anfora/Pipfile.lock /opt/anfora/Pipfile.lock
 WORKDIR /opt/anfora
-RUN pip3 install pipenv \
- && pipenv install --python python3.6
+RUN pipenv install --python python3.6
+
+# install rest of anfroa
+COPY anfora/ /opt/anfora/
+
+# add entrypoint script
+COPY entrypoint.sh /opt/anfora/
 
 ENTRYPOINT ["/opt/anfora/entrypoint.sh"]
