@@ -1,0 +1,40 @@
+# Public data
+application_name: 'Anfora'
+server_description: ''
+
+# http config
+scheme: 'http'
+domain: 'localhost'
+port: '3000'
+
+# Positition
+root_path: '/opt/anfora/'
+
+# Storage
+
+media_folder: '/var/anfora/media'
+thumb_folder: 'small'
+image_folder: 'max_resolution'
+icons_folder: 'icons'
+
+# Uri salt
+
+salt_code: 'whySoSalty?'
+
+# DB
+
+db_user: 'postgres'
+db_pwd: 'anforapostgres'
+db_port: '5432'
+db_host: 'db'
+db_name: 'postgres'
+
+#email
+
+email_enabled: True # "y" for yes - "n" for no
+
+smtp_server: 'localhost'
+smtp_port: '1234'
+smtp_login: 't'
+smtp_password: 't'
+smtp_adress: 't'
