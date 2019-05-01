@@ -28,19 +28,11 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg \
 
 # install anfora
 COPY anfora/ /opt/anfora/
+COPY entrypoint.sh /opt/anfora/
 WORKDIR /opt/anfora/src/
-
-# install anfora client
-RUN rmdir client && git clone https://github.com/anforaProject/client.git
 
 WORKDIR /opt/anfora
 RUN pip3 install pipenv \
  && pipenv install --python python3.6
 
-WORKDIR /opt/anfora/src/client
-RUN yarn install && yarn build
-
-# TODO: Find better way to give config
-WORKDIR /opt/anfora/src
-RUN pipenv run python commands.py -s --config config/docker.yaml
-
+ENTRYPOINT ["/opt/anfora/entrypoint.sh"]
